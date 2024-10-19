@@ -9,14 +9,14 @@ jobs:
     steps:      
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: set up clang
         run: sudo apt-get install clang-format
       
       - name: check format
         run: | 
-          echo "Checking format of the following files:"
-          find . -name '*.cpp' -o -name '*.hpp' -o -name '*.h'
+          # echo "Checking format of the following files:"
+          # find . -name '*.cpp' -o -name '*.hpp' -o -name '*.h'
           if ! find . -name '*.cpp' -o -name '*.hpp' -o -name '*.h' | xargs clang-format --dry-run --Werror; then
             echo "Code is not formatted according to clang-format."
             exit 1
