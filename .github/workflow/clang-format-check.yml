@@ -1,0 +1,21 @@
+name: clang-format-check
+
+on: push
+
+jobs:
+  format-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: set up clang
+        run: sudo apt-get install clang-format
+      
+      - name: check format
+        run:
+          # Check if any files are not formatted
+          if ! git diff --exit-code --name-only | grep -E '\.(cpp|h|c|cc|hpp)$' | xargs clang-format --dry-run --Werror; then
+            echo "Code is not formatted according to clang-format."
+            exit 1
+          else
+            echo "Code is properly formatted."
+          fi
