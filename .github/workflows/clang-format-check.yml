@@ -12,7 +12,8 @@ jobs:
       
       - name: check format
         run: | 
-          # Check if any files are not formatted
+          echo "Checking format of the following files:"
+          find . -name '*.cpp' -o -name '*.hpp' -o -name '*.h'
           if ! find . -name '*.cpp' -o -name '*.hpp' -o -name '*.h' | xargs clang-format --dry-run --Werror; then
             echo "Code is not formatted according to clang-format."
             exit 1
